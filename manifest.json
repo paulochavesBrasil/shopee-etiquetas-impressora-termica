@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Shopee Etiqueta Splitter (Térmica)",
+  "version": "1.0.0",
+  "description": "Divide a folha de etiquetas da Shopee (awbprint) em etiquetas separadas, uma por página, para impressão em impressora térmica. Suporta até 4 etiquetas por folha e PDFs com várias folhas.",
+  "permissions": ["scripting", "tabs", "storage"],
+  "host_permissions": ["*://seller.shopee.com.br/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Dividir etiquetas Shopee (impressora térmica)",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://seller.shopee.com.br/awbprint*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "print.html",
+        "print.js",
+        "print.css",
+        "splitter.js",
+        "lib/pdf.min.js",
+        "lib/pdf.worker.min.js"
+      ],
+      "matches": ["*://seller.shopee.com.br/*"]
+    }
+  ]
+}
